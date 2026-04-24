@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to host? | AWB Support</title>
+    <style>
+        :root {
+            --primary: #ffffff;
+            --accent: #3b82f6;
+            --bg: #0a0a0c;
+            --glass: rgba(255, 255, 255, 0.05);
+            --blur: blur(20px);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg);
+            color: var(--primary);
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .ambient-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            filter: blur(80px);
+            opacity: 0.4;
+            background: linear-gradient(45deg, #1e3a8a, #581c87);
+        }
+
+        .main-card {
+            position: relative;
+            width: 90vw;
+            max-width: 1000px;
+            background: var(--glass);
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 10px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        video {
+            width: 100%;
+            display: block;
+            border-radius: 18px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        }
+
+        .controls-area {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        #timer-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .timer-text {
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
+            transition: width 1s linear;
+        }
+
+        #skip-btn {
+            display: none;
+            background: var(--primary);
+            color: black;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 0.6s forwards;
+        }
+
+        #skip-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255,255,255,0.2);
+            background: #e5e5e5;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="ambient-bg"></div>
+
+<div class="main-card">
+    <video id="v" autoplay muted playsinline>
+        <source src="video.mp4" type="video/mp4">
+    </video>
+
+    <div class="controls-area">
+        <div id="timer-wrapper">
+            <div class="progress-container">
+                <div id="progress-fill" class="progress-fill"></div>
+            </div>
+            <span class="timer-text">Skip unlock in <span id="count">20</span>s</span>
+        </div>
+        
+        <button id="skip-btn" onclick="location.href='help.html'">
+            Skip Guide →
+        </button>
+    </div>
+</div>
+
+<script>
+    const DURATION = 20; // Updated to 20 seconds
+    let timeLeft = DURATION;
+    
+    const countEl = document.getElementById('count');
+    const wrapper = document.getElementById('timer-wrapper');
+    const btn = document.getElementById('skip-btn');
+    const progressFill = document.getElementById('progress-fill');
+
+    const itv = setInterval(() => {
+        timeLeft--;
+        
+        // Update the count display
+        countEl.innerText = Math.max(0, timeLeft);
+        
+        // Update progress bar
+        const percentage = ((DURATION - timeLeft) / DURATION) * 100;
+        progressFill.style.width = `${percentage}%`;
+
+        if (timeLeft <= 0) {
+            clearInterval(itv);
+            // Short delay so the bar fills completely before switching
+            setTimeout(() => {
+                wrapper.style.display = 'none';
+                btn.style.display = 'block';
+            }, 600);
+        }
+    }, 1000);
+
+    // Initial nudge to start progress immediately
+    setTimeout(() => {
+        progressFill.style.width = `${((DURATION - (DURATION-0.1)) / DURATION) * 100}%`;
+    }, 50);
+
+    document.addEventListener('click', () => { document.getElementById('v').play(); }, {once: true});
+</script>
+
+</body>
+</html>
