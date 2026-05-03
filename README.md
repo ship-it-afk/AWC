@@ -24,3 +24,16 @@ We love help! Please feel free to fork the repo and submit pull requests.
 
 ## 📄 License
 This project is licensed under the MIT License.
+
+---
+
+## 🛑 IMPORTANT: PLEASE READ
+By using this software, you agree to the following:
+
+NO LIABILITY: I am a developer sharing this tool for free. In no event shall I (the author) be held liable for any damages, lawsuits, or losses resulting from the use of this builder, the websites created with it, or the hosting of those websites.
+
+USE AT YOUR OWN RISK: This tool generates code and facilitates web hosting. It is provided **"AS IS"** without any warranty. If your website fails to load, loses data, or if you encounter issues with third-party hosting (like **GitHub Pages**), that is your responsibility.
+
+NO GUARANTEE: I do not guarantee that the exported code will be compatible with every browser or that the builder is 100% bug-free. You are responsible for testing your own `index.html` after export.
+
+IF YOU **DO NOT AGREE** TO THESE TERMS, **DO NOT USE THIS TOOL**.
