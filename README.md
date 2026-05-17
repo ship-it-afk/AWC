@@ -24,7 +24,7 @@ If you want to run the builder locally:
 We love help! Please feel free to fork the repo and submit pull requests.
 
 ## ❤️ Support
-I love help! Show your support by subscribing to my YouTube channel! Link: `https://www.youtube.com/@technologiesambient`
+I love help! Show your support by subscribing to my YouTube channel! Link: `https://www.youtube.com/@techambient` and `https://www.youtube.com/@technologiesambient`
 
 ## 📄 License
 This project is licensed under the MIT License.
